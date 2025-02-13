@@ -70,3 +70,72 @@ jobs:
           name: 'folder_name'
           value: 'foldr_name'
           token: ${{ secrets.GH_ORG_TOKEN }}
+
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'git_files'
+          value: 'false'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'git_files'}}
+        with:
+          name: 'git_files'
+          value: 'true'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'config_git_files'}}
+        with:
+          name: 'git_files'
+          value: 'true'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'config_folder'
+          value: 'false'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'config_git_files'}}
+        with:
+          name: 'config_folder'
+          value: 'true'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'docker_user'
+          value: ${{ inputs.docker_user }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'docker_image'
+          value: ${{ inputs.docker_image }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'docker_tag'
+          value: 'latest'
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'docker_registry'
+          value: ${{ inputs.docker_registry }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'privileged'
+          value: ${{ inputs.privileged }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'docker network'
+          value: ${{ inputs.docker_network }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'vhost_name'
+          value: ${{ inputs.vhost_name }}
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        with:
+          name: 'vhost_port'
+          value: ${{ inputs.vhost_port }}
+          token: ${{ secrets.GH_ORG_TOKEN }}

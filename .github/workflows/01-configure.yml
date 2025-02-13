@@ -16,10 +16,10 @@ on:
           - config_git_files
       docker_user:
         description: 'docker user for creating image name'
-        default: ''
+        default: 'pknw1'
       docker_image:
         description: 'the output docker image name'
-        default: ''
+        default: 'image'
       docker_registry:
         description: 'whther to use the dokcer registry '
         type: boolean

@@ -6,13 +6,18 @@ on:
       runtime_privileged:
         type: boolean
         default: false
+        required: true
       runtime_virtual_host:
+        required: true
         default: 'pknw1.co.uk'
       runtime_virtual_port:
+        required: true
         default: '80'
       runtime_restart_policy:
+        required: true
         default: 'unless_stopped'
       puid_guid:
+        required: true
         default: '666:666'
 
 jobs:

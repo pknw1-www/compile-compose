@@ -1,4 +1,4 @@
-name: 01 -  Confguration 2 of 2
+name: 02 -  Confguration 2 of 2
 
 on:
   workflow_dispatch:
@@ -50,18 +50,22 @@ jobs:
           name: 'runtime_privileged'
           value: '${{ inputs.runtime_privileged }}'
           token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
         with:
           name: 'runtime_virtual_host'
           value: '${{ inputs.runtime_virtual_host }}'
           token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
         with:
           name: 'runtime_virtual_port'
           value: '${{ inputs.runtime_virtual_port }}'
           token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
         with:
           name: 'runtime_restart_policy'
           value: '${{ inputs.runtime_restart_policy }}'
           token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
         with:
           name: 'puid_guid'
           value: '${{ inputs.puid_guid }}'

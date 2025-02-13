@@ -8,26 +8,18 @@ on:
         default: 'test-www'
       git_files:
         description: 'Use external folder for Git Files'
-        type: boolean
-        default: true
-      config_folder:
-        description: 'initialize a config sub-folder and repo'
-        type: boolean
-        default: true
+        type: choice
+        default: 'config_git_files'
+        options:
+          - config
+          - git_files
+          - config_git_files
       docker_user:
         description: 'docker user for creating image name'
         default: ''
       docker_image:
         description: 'the output docker image name'
         default: ''
-      docker_tag:
-        description: 'the default tag'
-        type: choice
-        default: 'latest'
-        options:
-          - latest
-          - latest_timestamp
-          - latest_timestamp_dev
       docker_registry:
         description: 'whther to use the dokcer registry '
         type: boolean
@@ -51,15 +43,7 @@ on:
       vhost_port:
         description: 'Virtual Port'
         default: '80'
-      app_type:
-        description: 'check app type'
-        type: choice
-        default: 'mobirise'
-        options:
-          - mobirise
-          - html
-          - flask
-          - 3rdParty
+  
 jobs:
   init:
     runs-on: ubuntu-latest
@@ -89,12 +73,30 @@ jobs:
       - uses: action-pack/set-variable@v1
         with:
           name: 'git_files'
-          value: ${{ inputs.git_files }}
+          value: false
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'git_files'}}
+        with:
+          name: 'git_files'
+          value: true
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'config_git_files'}}
+        with:
+          name: 'git_files'
+          value: true
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:
           name: 'config_folder'
-          value: ${{ inputs.config_folder }}
+          value: false
+          token: ${{ secrets.GH_ORG_TOKEN }}
+      - uses: action-pack/set-variable@v1
+        if: ${{ inputs.git_files == 'config_git_files'}}
+        with:
+          name: 'config_folder'
+          value: true
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:

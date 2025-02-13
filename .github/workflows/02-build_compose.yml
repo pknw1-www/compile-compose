@@ -27,86 +27,12 @@ jobs:
 
       - run: |
           echo "services:" >> docker-compose.tmp
-          cat << EOF >> docker-compose.tmp
+          MYVAR=$(cat << EOF >> docker-compose.tmp
             ${{ vars.repo_name }}:
               image: ${{ vars.docker_user }}/${{ vars.docker_image}}:${{ vars.docker_tag }}
               hostname: ${{ vars.vhost_name }}
               container_name: ${{ vars.repo_name }}
-          EOF
-      - name: Privilged Mode
-        if: ${{ vars.privileged == true }} 
-        run: |
-          cat << EOF >> docker-compose.tmp
-              privileged: true
-          EOF
-      - name: Networks Mode Mixed
-        if: ${{ vars.network_mode == 'proxy_admin' }} 
-        run: |
-          cat << EOF >> docker-compose.tmp
-              networks:
-                - proxy
-                - admin
-          EOF
-      - name: Networks Mode Proxy
-        if: ${{ vars.network_mode == 'proxy' }} 
-        run: |
-          cat << EOF >> docker-compose.tmp
-              networks:
-                - proxy
-          EOF
-      - name: Networks Mode Admin
-        if: ${{ vars.network_mode == 'admin' }} 
-        run: |
-          cat << EOF >> docker-compose.tmp
-              networks:
-                - admin
-          EOF
-      - name: volumes
-        run: |
-          cat << EOF >> docker-compose.tmp
-              volumes:
-                - /etc/localtime:/etc/localtime
-          EOF
-      - name: volumes Config
-        run: |
-          cat << EOF >> docker-compose.tmp
-                - ./config:/config
-          EOF
-      - name: Environment
-        run: |
-          cat << EOF >> docker-compose.tmp
-              environment:
-                - VIRTUAL_HOST=${{ vars.vhost_name }}
-                - VIRTUAL_PORT=${{ vars.vhost_name }}
-          EOF
+          EOF)
       - run: |
-          echo "networks:" >> docker-compose.tmp
-          cat << EOF >> docker-compose.tmp
-            proxy:
-              external: true
-            admin:
-              external: true
-
-          EOF
-      - run: |
-          cp docker-compose.tmp deploy/docker-compose.yml
-          cat docker-compose.tmp
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Updated compose files
-          push_options: '--force'
-          branch: main
-
-  config_folder:
-    runs-on: ubuntu-latest
-    needs: compose_files
-    if: ${{ vars.config_folder == true }}
-    permissions:
-      contents: write
-      actions: write
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_ORG_TOKEN }}
-
-
+          echo ${MYVAR}
+   

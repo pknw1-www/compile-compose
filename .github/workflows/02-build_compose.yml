@@ -26,13 +26,18 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
 
       - run: |
-          echo "services:" >> docker-compose.tmp
-          MYVAR=$(cat << EOF >> docker-compose.tmp
-            ${{ vars.repo_name }}:
-              image: ${{ vars.docker_user }}/${{ vars.docker_image}}:${{ vars.docker_tag }}
-              hostname: ${{ vars.vhost_name }}
-              container_name: ${{ vars.repo_name }}
-          EOF)
+          cat << EOF1 > config1
+          test
+          test
+          EOF1
       - run: |
-          echo ${MYVAR}
+          cat << EOF2 > config2
+          test2
+          test2
+          EOF2
+      - run: |
+          ls -l
+          cat config1
+          cat config2
+
    

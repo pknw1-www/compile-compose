@@ -1,4 +1,4 @@
-name: 01 - Configure
+name: 01 -  Confguration 1 of 2
 
 on:
   workflow_dispatch:
@@ -11,6 +11,14 @@ on:
         default: true
       configure_mounts:
         type: choice
+        options:
+          - system
+          - fuse
+          - media
+          - system fuse
+          - system media
+          - fuse media
+          - all
       docker_image_owner:
         default: 'pknw1'
       docker_image_name:
@@ -139,3 +147,54 @@ jobs:
           echo "${{ vars.docker_image_tag }}" >> $GITHUB_STEP_SUMMARY
           echo "${{ vars.docker_image_registry }}" >> $GITHUB_STEP_SUMMARY
           echo "${{ vars.docker_networks }}" >> $GITHUB_STEP_SUMMARY
+
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      runtime_privileged:
+        type: boolean
+        default: false
+      runtime_virtual_host:
+        default: 'pknw1.co.uk'
+      runtime_virtual_port:
+        default: '80'
+      runtime_restart_policy:
+        default: 'unless_stopped'
+      puid_guid:
+        default: '666:666'
+
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_ORG_TOKEN }}
+
+
+      privileged:
+        description: 'Run in privileged '
+        type: boolean
+        default: 'false'
+      docker_network:
+        description: 'Docker Network'
+        type: choice
+        required: true
+        default: 'proxy'
+        options:
+          - proxy
+          - admin
+          - proxy_admin
+          - host
+      vhost_name:
+        description: 'URL'
+        default: '.pknw1.co.uk'
+      vhost_port:
+        description: 'Virtual Port'
+        default: '80'

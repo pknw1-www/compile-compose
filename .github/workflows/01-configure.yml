@@ -169,7 +169,7 @@ jobs:
               privileged: true
           EOF
       - name: Networks Mode Mixed
-        if: ${{ vars.network_mode == 'proxy_admin'' }} 
+        if: ${{ vars.network_mode == 'proxy_admin' }} 
         run: |
           cat << EOF >> docker-compose.tmp
               networks:
@@ -177,14 +177,14 @@ jobs:
                 - admin
           EOF
       - name: Networks Mode Proxy
-        if: ${{ vars.network_mode == 'proxy'' }} 
+        if: ${{ vars.network_mode == 'proxy' }} 
         run: |
           cat << EOF >> docker-compose.tmp
               networks:
                 - proxy
           EOF
       - name: Networks Mode Admin
-        if: ${{ vars.network_mode == 'admin'' }} 
+        if: ${{ vars.network_mode == 'admin' }} 
         run: |
           cat << EOF >> docker-compose.tmp
               networks:

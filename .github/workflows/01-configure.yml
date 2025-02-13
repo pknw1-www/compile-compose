@@ -31,6 +31,7 @@ on:
       docker_network:
         description: 'Docker Network'
         type: choice
+        required: true
         default: 'proxy'
         options:
           - proxy
@@ -126,7 +127,7 @@ jobs:
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:
-          name: 'docker network'
+          name: 'docker_network'
           value: ${{ inputs.docker_network }}
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1

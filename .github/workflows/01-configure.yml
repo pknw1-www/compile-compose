@@ -27,7 +27,7 @@ on:
       privileged:
         description: 'Run in privileged '
         type: boolean
-        default: false
+        default: 'false'
       docker_network:
         description: 'Docker Network'
         type: choice
@@ -73,30 +73,30 @@ jobs:
       - uses: action-pack/set-variable@v1
         with:
           name: 'git_files'
-          value: false
+          value: 'false'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         if: ${{ inputs.git_files == 'git_files'}}
         with:
           name: 'git_files'
-          value: true
+          value: 'true'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         if: ${{ inputs.git_files == 'config_git_files'}}
         with:
           name: 'git_files'
-          value: true
+          value: 'true'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:
           name: 'config_folder'
-          value: false
+          value: 'false'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         if: ${{ inputs.git_files == 'config_git_files'}}
         with:
           name: 'config_folder'
-          value: true
+          value: 'true'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:

@@ -215,6 +215,9 @@ jobs:
               external: true
 
           EOF
+      - run: |
+          cp docker-compose.tmp deploy/docker-compose.yml
+          cat docker-compose.tmp
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Updated compose files

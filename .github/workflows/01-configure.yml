@@ -63,10 +63,10 @@ jobs:
       - uses: action-pack/set-variable@v1
         with:
           name: 'repo_name'
-          value: ${{ inputs.repo_name }}
+          value: 'repo_name'
           token: ${{ secrets.GH_ORG_TOKEN }}
       - uses: action-pack/set-variable@v1
         with:
           name: 'folder_name'
-          value: ${{ inputs.folder_name }}
+          value: 'foldr_name'
           token: ${{ secrets.GH_ORG_TOKEN }}

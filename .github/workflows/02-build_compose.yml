@@ -14,6 +14,18 @@ jobs:
         with:
           token: ${{ secrets.GH_ORG_TOKEN }}
       - run: |
+          echo "${{ vars.DOCKER_USER }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ vars.docker_user }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ vars.docker_image }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ vars.docker_tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ vars.vhost_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ vars.repo_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{vars.privileged }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+      - run: |
           echo "services:" >> docker-compose.tmp
           cat << EOF >> docker-compose.tmp
             ${{ vars.repo_name }}:

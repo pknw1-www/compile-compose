@@ -1,0 +1,17 @@
+services:
+  compile-compose:
+    image: /image:latest
+    hostname: .pknw1.co.uk
+    container_name: compile-compose
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./config:/config
+    environment:
+      - VIRTUAL_HOST=.pknw1.co.uk
+      - VIRTUAL_PORT=.pknw1.co.uk
+networks:
+  proxy:
+    external: true
+  admin:
+    external: true
+

@@ -5,14 +5,18 @@ on:
     inputs:
       configure_base_folder:
         default: 'build-image'
+        required: true
       configure_git_files:
         type: boolean
         default: true
+        required: true
       configure_config_folder:
         type: boolean
         default: true
+        required: true
       configure_mounts:
         type: choice
+        required: true
         default: 'all'
         options:
           - system
@@ -24,14 +28,19 @@ on:
           - all
       docker_image_owner:
         default: 'pknw1'
+        required: true
       docker_image_name:
         default: 'build_image'
+        required: true
       docker_image_tag:
         default: 'latest'
+        required: true
       docker_image_registry:
+        required: true
         type: boolean
         default: true
-      docker_networks :
+      docker_networks:
+        required: true
         default: 'both'
         type: choice
         options:

@@ -1,17 +1,34 @@
 services:
-  APP_TYPE-REPO_NAME:
-    networks:
-      - proxy
-    image: DOCKER_OWNER/DOCKER_IMAGE:latest
-    container_name: APP_TYPE-URL
-    hostname: URL
+  compile-compose:
+    image: /image:latest
+    hostname: .pknw1.co.uk
+    container_name: compile-compose
     volumes:
+      - /etc/localtime:/etc/localtime
       - ./config:/config
     environment:
-      - VIRTUAL_HOST=URL
-      - VIRTUAL_PORT=80
-
+      - VIRTUAL_HOST=.pknw1.co.uk
+      - VIRTUAL_PORT=.pknw1.co.uk
 networks:
   proxy:
     external: true
-    name: proxy
+  admin:
+    external: true
+
+services:
+  compile-compose:
+    image: /image:latest
+    hostname: .pknw1.co.uk
+    container_name: compile-compose
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./config:/config
+    environment:
+      - VIRTUAL_HOST=.pknw1.co.uk
+      - VIRTUAL_PORT=.pknw1.co.uk
+networks:
+  proxy:
+    external: true
+  admin:
+    external: true
+
